@@ -4,11 +4,13 @@ project('mailio', 'cpp',
   default_options: ['cpp_std=c++17', 'warning_level=2']) # C++17 Standard setzen
 
 # compiler used by multiple subdirectories
-compiler = meson.get_compiler('cpp')
-if build_machine.system() == 'darwin'
-  add_languages('objcpp', native: false)
-  add_global_arguments('-U_LIBCPP_ENABLE_ASSERTIONS', language : 'cpp')
-  add_global_arguments('-D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_FAST', language : 'cpp')
+if not meson.is_subproject()
+  compiler = meson.get_compiler('cpp')
+  if build_machine.system() == 'darwin'
+    add_languages('objcpp', native: false)
+    add_global_arguments('-U_LIBCPP_ENABLE_ASSERTIONS', language : 'cpp')
+    add_global_arguments('-D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_FAST', language : 'cpp')
+  endif
 endif
 
 # Boost: Hauptabhängigkeit für asio (Networking), system und ggf. weitere
