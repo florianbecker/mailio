@@ -64,6 +64,12 @@ mailio_lib = library('mailio',
 # Installation der Header-Dateien in das System-Include-Verzeichnis
 install_subdir('include/mailio', install_dir: 'include')
 
+#  compile_args: cpp_args,
+mailio_dep = declare_dependency(
+  link_with: mailio_lib,
+  include_directories: mailio_inc,
+)
+
 # Generiert eine .pc-Datei, damit andere Meson/CMake Projekte mailio leicht finden
 pkgconfig = import('pkgconfig')
 pkgconfig.generate(
