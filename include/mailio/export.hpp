@@ -13,7 +13,7 @@
 #      define MAILIO_EXPORT __declspec(dllexport)
 #    else
         /* We are using this library */
-#      define MAILIO_EXPORT __declspec(dllimport)
+#      define MAILIO_EXPORT __declspec(dllexport)
 #    endif
 #else
 #    ifdef mailio_EXPORTS
