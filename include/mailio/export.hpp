@@ -7,6 +7,15 @@
 #  define MAILIO_NO_EXPORT
 #else
 #  ifndef MAILIO_EXPORT
+#if defined(_MSC_VER) || defined(__MINGW32__) || defined(__MSYS__) || defined(__CYGWIN__)
+#    ifdef mailio_EXPORTS
+        /* We are building this library */
+#      define MAILIO_EXPORT __declspec(dllexport)
+#    else
+        /* We are using this library */
+#      define MAILIO_EXPORT __declspec(dllimport)
+#    endif
+#else
 #    ifdef mailio_EXPORTS
         /* We are building this library */
 #      define MAILIO_EXPORT __attribute__((visibility("default")))
@@ -14,6 +23,7 @@
         /* We are using this library */
 #      define MAILIO_EXPORT __attribute__((visibility("default")))
 #    endif
+#endif
 #  endif
 
 #  ifndef MAILIO_NO_EXPORT
